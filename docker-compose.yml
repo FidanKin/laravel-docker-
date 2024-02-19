@@ -12,6 +12,9 @@ services:
             - 5173:5173
         volumes:
             - .:/var/www:cached
+        entrypoint: |
+            /bin/sh -c "sudo chgrp -R www-data storage bootstrap/cache"
+            /bin/sh -c "sudo chmod -R ug+rwx storage bootstrap/cache"
 
     ####################################################################################################
     # Nginx

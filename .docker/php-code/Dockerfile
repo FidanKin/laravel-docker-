@@ -1,3 +1,4 @@
+FROM app/php8.2
 # Copy existing application directory contents
 COPY . /var/www
 

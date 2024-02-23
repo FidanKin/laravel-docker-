@@ -2,7 +2,7 @@ FROM php:8.2-fpm
 
 COPY php.ini /usr/local/etc/php/
 COPY docker.conf /usr/local/etc/php-fpm.d/docker.conf
-COPY bashrc /root/
+COPY .bashrc /root/
 
 RUN apt-get update \
   && apt-get install -y build-essential zlib1g-dev default-mysql-client curl gnupg procps vim git unzip libzip-dev libpq-dev \

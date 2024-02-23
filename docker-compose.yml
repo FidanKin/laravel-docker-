@@ -10,6 +10,10 @@ services:
         build: .docker/php
         ports:
             - 5173:5173
+        volumes: 
+            - .:/var/www
+        networks:
+            - app-network
 
     ####################################################################################################
     # PHP code
@@ -20,6 +24,8 @@ services:
             dockerfile: ./.docker/php-code/Dockerfile
         depends_on:
             - php
+        networks:
+            - app-network
     ####################################################################################################
     # Nginx
     ####################################################################################################
@@ -33,6 +39,8 @@ services:
             - .docker/nginx/nginx.conf:/etc/nginx/nginx.conf
         depends_on:
             - php
+        networks:
+            - app-network
 
     ####################################################################################################
     # DATABASE (MySQL)
@@ -51,6 +59,8 @@ services:
             MYSQL_DATABASE: refactorian
             MYSQL_USER: refactorian
             MYSQL_PASSWORD: refactorian
+        networks:
+            - app-network
 
     # ####################################################################################################
     # # DATABASE (MariaDB)
@@ -94,3 +104,8 @@ services:
         ports:
         - 8025:8025
         - 1025:1025
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge

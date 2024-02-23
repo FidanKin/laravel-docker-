@@ -7,14 +7,12 @@ services:
     # PHP
     ####################################################################################################
     php:
-        #build: .docker/php
+        build: .docker/php
         ports:
             - 5173:5173
         build:
             context: .
             dockerfile: ./.docker/php/Dockerfile
-        #volumes:
-        #    - .:/var/www:cached
 
     ####################################################################################################
     # Nginx

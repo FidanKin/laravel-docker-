@@ -9,12 +9,10 @@ services:
     php:
         build:
             context: .
-            dockerfile: ./docker/php/Dockerfile
+            dockerfile: ./.docker/php/Dockerfile
         ports:
             - 5173:5173
         image: app/php8.2
-        volumes: 
-            - .:/var/www
         networks:
             - app-network
     ####################################################################################################

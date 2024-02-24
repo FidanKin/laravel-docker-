@@ -1,8 +1,8 @@
 FROM php:8.2-fpm
 
-COPY php.ini /usr/local/etc/php/
-COPY docker.conf /usr/local/etc/php-fpm.d/docker.conf
-COPY .bashrc /root/
+COPY ./.docker/php/php.ini /usr/local/etc/php/
+COPY ./.docker/php/docker.conf /usr/local/etc/php-fpm.d/docker.conf
+COPY ./.docker/php/.bashrc /root/
 
 RUN apt-get update \
   && apt-get install -y build-essential zlib1g-dev default-mysql-client curl gnupg procps vim git unzip libzip-dev libpq-dev \
@@ -40,6 +40,14 @@ RUN composer global require "laravel/installer"
 
 WORKDIR /root
 RUN git clone https://github.com/seebi/dircolors-solarized
+
+# Copy existing application directory contents
+COPY . /var/www
+
+# Copy existing application directory permissions
+COPY --chown=www-data:www-data . /var/www
+
+USER www-data
 
 EXPOSE 5173
 WORKDIR /var/www
